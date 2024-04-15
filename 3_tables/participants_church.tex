@@ -1,0 +1,38 @@
+\begin{table}
+\centering
+\begin{talltblr}[         %% tabularray outer open
+entry=none,label=none,
+note{}={+ p < 0.1, * p < 0.05, ** p < 0.01, *** p < 0.001},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]Q[]},
+column{1}={halign=l,},
+column{2}={halign=c,},
+column{3}={halign=c,},
+column{4}={halign=c,},
+column{5}={halign=c,},
+hline{18}={1,2,3,4,5}{solid, 0.05em, black},
+}                     %% tabularray inner close
+\toprule
+& Monetary income & Market sales & ROSCA contributions & Village discord \\ \midrule %% TinyTableHeader
+treated                      & \num{17571.297}*  & \num{-596.669}     & \num{-1535.353}*   & \num{-0.002}   \\
+& (\num{7102.847})  & (\num{2749.665})   & (\num{690.867})    & (\num{0.028})  \\
+income\_BL                  & \num{0.338}***    &                     &                     &                 \\
+& (\num{0.066})     &                     &                     &                 \\
+age\_BL                     & \num{288.590}     & \num{-88.567}      & \num{-30.257}      & \num{0.000}    \\
+& (\num{276.173})   & (\num{101.808})    & (\num{34.937})     & (\num{0.001})  \\
+sex\_BLFEMALE               & \num{-15018.118}* & \num{-7744.026}*** & \num{-4560.534}*** & \num{-0.020}   \\
+& (\num{5990.022})  & (\num{2267.762})   & (\num{807.877})    & (\num{0.028})  \\
+dist\_kga                   & \num{-1087.691}   & \num{-35.979}      & \num{94.323}       & \num{0.005}    \\
+& (\num{883.557})   & (\num{400.925})    & (\num{92.936})     & (\num{0.004})  \\
+market\_sale\_total\_BL   &                    & \num{0.256}        &                     &                 \\
+&                    & (\num{0.192})      &                     &                 \\
+rosca\_amt\_gives\_BL     &                    &                     & \num{0.340}**      &                 \\
+&                    &                     & (\num{0.113})      &                 \\
+discord\_village\_num\_BL &                    &                     &                     & \num{0.144}*** \\
+&                    &                     &                     & (\num{0.041})  \\
+Num.Obs.                     & \num{1155}        & \num{1200}         & \num{1200}         & \num{1200}     \\
+R2                           & \num{0.118}       & \num{0.080}        & \num{0.103}        & \num{0.038}    \\
+\bottomrule
+\end{talltblr}
+\end{table}
