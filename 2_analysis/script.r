@@ -12,7 +12,7 @@ village_treatment$treated_church = ifelse(village_treatment$treatment == 1, 1, 0
 # Treatment arm dummies for respondents
 data <- merge(data, village_treatment,by="vil_code")
 
-# Treatment effect
+# Treatment effect (participants)
 library(lessR)
 data_long_all <- data[.(respondent_BL=="RESPONDENT - LONG"),]
 data_long_all$market_sale_total_EL[is.na(data_long_all$market_sale_total_EL)] <- 0
@@ -24,7 +24,7 @@ data_long_all$discord_village_num_EL[is.na(data_long_all$discord_village_num_EL)
 
 library(fixest)
 
-## All
+## All arms
 income_all <- feols(income_EL ~ treated + income_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_long_all)
 market_sale_all <- feols(market_sale_total_EL ~ treated + market_sale_total_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_long_all)
 rosca_all <- feols(rosca_amt_receives_EL ~ treated + rosca_amt_receives_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_long_all)
@@ -43,4 +43,27 @@ income_church <- feols(income_EL ~ treated + income_BL + age_BL + sex_BL + dist_
 market_sale_church <- feols(market_sale_total_EL ~ treated + market_sale_total_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_long_church)
 rosca_church <- feols(rosca_amt_receives_EL ~ treated + rosca_amt_receives_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_long_church)
 discord_church <- feols(discord_village_num_EL ~ treated + discord_village_num_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_long_church)
+
+# Treatment effect (friends)
+data_friends_all <- data[.(respondent_BL=="RESPONDENT - FRIEND"),]
+
+## All arms
+income_all_spillover <- feols(income_EL ~ treated + income_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_friends_all)
+market_sale_all_spillover <- feols(market_sale_total_EL ~ treated + market_sale_total_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_friends_all)
+rosca_all_spillover <- feols(rosca_amt_receives_EL ~ treated + rosca_amt_receives_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_friends_all)
+discord_all_spillover <- feols(discord_village_num_EL ~ treated + discord_village_num_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_friends_all)
+
+## Market
+data_friends_market <- data_long_all[.(treated_market==1 | treated ==0),]
+income_market_spillover <- feols(income_EL ~ treated + income_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_friends_market)
+market_sale_market_spillover <- feols(market_sale_total_EL ~ treated + market_sale_total_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_friends_market)
+rosca_market_spillover <- feols(rosca_amt_receives_EL ~ treated + rosca_amt_receives_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_friends_market)
+discord_market_spillover <- feols(discord_village_num_EL ~ treated + discord_village_num_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_friends_market)
+
+## Churches
+data_friends_church <- data_long_all[.(treated_church==1 | treated ==0),]
+income_church_spillover <- feols(income_EL ~ treated + income_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_friends_church)
+market_sale_church_spillover <- feols(market_sale_total_EL ~ treated + market_sale_total_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_friends_church)
+rosca_church_spillover <- feols(rosca_amt_receives_EL ~ treated + rosca_amt_receives_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_friends_church)
+discord_church_spillover <- feols(discord_village_num_EL ~ treated + discord_village_num_BL + age_BL + sex_BL + dist_kga | wave, cluster = ~ vil_code, data = data_friends_church)
 
