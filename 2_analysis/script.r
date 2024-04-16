@@ -52,8 +52,6 @@ participants_market <- modelsummary(list("Monetary income" = income_market, "Mar
 participants_church <- modelsummary(list("Monetary income" = income_church, "Market sales" = market_sale_church, "ROSCA contributions" = rosca_church, "Village discord" = discord_church), gof_map = c("nobs", "r.squared"), stars = TRUE, output = "3_tables/participants_church.tex")
 
 ## Figures
-income_market_sale_rosca_discord_all_market_church <- list(income_all, income_market, income_church, market_sale_all, market_sale_market, market_sale_church, rosca_all, rosca_market, rosca_church, discord_all, discord_market, discord_church)
-
 library(sjPlot)
 library(sjlabelled)
 library(sjmisc)
@@ -125,8 +123,39 @@ spillover_market <- modelsummary(list("Monetary income" = income_market_spillove
 spillover_church <- modelsummary(list("Monetary income" = income_church_spillover, "Market sales" = market_sale_church_spillover, "ROSCA contributions" = rosca_church_spillover, "Village discord" = discord_church_spillover), gof_map = c("nobs", "r.squared"), stars = TRUE, output = "3_tables/spillover_church.tex")
 
 ## Figures
-
-
-
-
-
+plot_models(income_all_spillover, income_market_spillover, income_church_spillover,
+            market_sale_all_spillover, market_sale_market_spillover, market_sale_church_spillover,
+            rosca_all_spillover, rosca_market_spillover, rosca_church_spillover,
+            discord_all_spillover, discord_market_spillover, discord_church_spillover,
+            rm.terms = c("income_BL", "market_sale_total_BL", "rosca_amt_gives_BL", "discord_village_num_BL","age_BL","sex_BL [FEMALE, MALE]","dist_kga"),
+            vline.color = "red",
+            spacing = 0.9,
+            show.values = TRUE,
+            axis.labels = c("Treatment Effect"),
+            m.labels = c("Income\nAll arms",
+                         "Village discord\nAll arms",
+                         "Village discord\nMarket arm",
+                         "Village discord\nChurch arm",
+                         "Income\nMarket arm",
+                         "Income\nChurch arm",
+                         "Market sales\nAll arms",
+                         "Market sales\nMarket arm",
+                         "Market sales\nChurch arm",
+                         "ROSCA giving\nAll arms",
+                         "ROSCA giving\nMarket arm",
+                         "ROSCA giving\nChurch arm"),
+            colors = c("brown", "blue", "gold",
+                       "brown", "blue", "gold",
+                       "brown", "blue", "gold",
+                       "brown", "blue", "gold")) + theme(legend.title=element_blank(),
+                                                               legend.key.spacing.y = unit(0.45, units="cm"),
+                                                               legend.text=element_text(size=7),
+                                                               legend.position = c(0.85, 0.5),
+                                                               axis.text.y = element_blank(),
+                                                               axis.title.y = element_blank(),
+                                                               axis.ticks.y = element_blank(),
+                                                               panel.grid.major.y = element_blank(),
+                                                               panel.grid.minor.y = element_blank(),
+                                                               panel.grid.major.x = element_line(size=.1, color="black"),
+                                                               panel.background = element_blank())
+ggsave("4_figures/treatment_effect_spillover.pdf")
