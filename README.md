@@ -7,7 +7,7 @@ The project proposal associated to this project is located in "0_proposal". Be a
 A unique .dta file is necessary to replicate the project. It is located in "1_data".
 
 ## Code
-A unique .r script needs to be run to replicate the project anaylses. A snapshot of the environment necessary to run the script is provided in the main directory (files ".Rprofile" and "renv.lock"). The associated "renv" folder includes a ".gitignore" file due to its size. The environment can be set up using R package "renv" and following the usual procedure (setting this repository as working directory).
+A unique .r script needs to be run to replicate the project anaylses. It is located in "2_analyses". A snapshot of the environment necessary to run the script is provided in the main directory (files ".Rprofile" and "renv.lock"). The associated "renv" folder includes a ".gitignore" file due to its size. The environment can be set up using R package "renv" and following the usual procedure (setting this repository as working directory).
 
 ## Outputs
 All .tex table outputs are located in "3_table". All .pdf vectorial figures are located in "4_figures".
