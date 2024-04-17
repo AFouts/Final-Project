@@ -20,8 +20,16 @@ data$market_sale_total_EL[is.na(data$market_sale_total_EL) & !is.na(data$today_E
 data$market_sale_total_BL[is.na(data$market_sale_total_BL)] <- 0
 data$rosca_amt_gives_EL[is.na(data$rosca_amt_gives_EL) & !is.na(data$today_EL)] <- 0
 data$rosca_amt_gives_BL[is.na(data$rosca_amt_gives_BL)] <- 0
+data$discord_spouse_num_EL[is.na(data$discord_spouse_num_EL) & !is.na(data$today_EL)] <- 0
+data$discord_spouse_num_BL[is.na(data$discord_spouse_num_BL)] <- 0
+data$discord_family_num_EL[is.na(data$discord_family_num_EL) & !is.na(data$today_EL)] <- 0
+data$discord_family_num_BL[is.na(data$discord_family_num_BL)] <- 0
 data$discord_village_num_EL[is.na(data$discord_village_num_EL) & !is.na(data$today_EL)] <- 0
 data$discord_village_num_BL[is.na(data$discord_village_num_BL)] <- 0
+
+## Creates relevant new variables
+data$discord_num_EL = data$discord_spouse_num_EL + data$discord_family_num_EL + data$discord_village_num_EL
+data$discord_num_BL = data$discord_spouse_num_BL + data$discord_family_num_BL + data$discord_village_num_BL
 
 # Treatment effect (participants)
 data_long_all = data[.(respondent_BL=="RESPONDENT - LONG"),]
