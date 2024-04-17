@@ -12,4 +12,5 @@ source("2_analysis/3_tables.r")
 source("2_analysis/4_figures.r")
 
 ## Run Tests
-testthat::test_dir("2_analysis/0_tests")
+testthat::local_edition(3)
+testthat::test_dir("2_analysis/tests")
